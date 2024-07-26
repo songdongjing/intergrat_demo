@@ -1,0 +1,41 @@
+<launch>
+    <!-- lidar-->
+    <node pkg="rslidar_sdk" name="rslidar_sdk_node" type="rslidar_sdk_node" output="screen">
+        <param name="config_path" value=""/>
+    </node>
+    <!-- autolabor -->
+    <node name="autolabor_driver" pkg="autolabor_pro1_driver" type="autolabor_pro1_driver" output="screen">
+        <param name="port_name" value="/dev/odom_USB" />
+        <param name="odom_frame" value="odom" />
+        <param name="base_frame" value="base_link" />
+
+        <param name="baud_rate" value="115200" />
+        <param name="control_rate" value="10" />
+        <param name="sensor_rate" value="5" />
+
+        <param name="reduction_ratio" value="1.0" />
+        <param name="encoder_resolution" value="1600.0" />
+
+        <param name="wheel_diameter" value="0.25" />
+        <param name="model_param_cw" value="0.80" />
+        <param name="model_param_acw" value="0.80" />
+        <param name="pid_rate" value="50.0" />
+        <param name="maximum_encoding" value="32.0" />
+    </node>
+        <!-- 键盘控制 -->
+    <node name="keyboard_driver" pkg="key" type="key_publisher.py" output="screen" />
+    <node name="keys_to_twist" pkg="key" type="key_subsribe.py" output="screen" />
+        <!-- RTK -->
+   <!-- <node name="gnss" pkg = "qfrtk_t3" type= "gnssrtk_node" output="screen" >
+      <arg name = "gnss_port" default = "/dev/rtk_USB"/>
+     <arg name = "gnss_module" default = "t3"/>
+     <arg name = "gnss_frame_id" default = "gnss"/> -->
+     <!-- <param name = "gpgga_enable" value= "true"/> -->
+   <!-- </node> -->
+      <!--IMU -->
+    <!-- <node name="imu_ah100b" pkg="imu_ah100b" type="imu_ah100b_pub" output="screen">
+    <param name="port_name" value="/dev/ttyUSB1" />
+    <param name="serial_port" value="/dev/imu_ah100b" />
+    <param name="framerate" type="int" value="100" />
+    </node> -->
+ </launch>   

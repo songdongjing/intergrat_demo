@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ubuntu/autoware/intergrat_demo/devel_isolated/navigation/setup.sh

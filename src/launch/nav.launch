@@ -1,0 +1,18 @@
+<launch>
+    <!--启动驱动-->
+    <!-- <include ns="/intergrat_demo/launch/driver.launch" /> -->
+    <!--启动坐标转换-->
+    <!-- <include ns="/intergrat_demo/launch/transform.launch" /> -->
+    <!-- 启动SLAM节点 -->
+    <!-- <include ns="/intergrat_demo/launch/gmapping.launch" /> -->
+    <!-- 运行move_base节点 -->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" clear_params="true">
+        <rosparam file="$(find nav)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find nav)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find nav)/param/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find nav)/param/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find nav)/param/base_local_planner_params.yaml" command="load" />
+    </node>
+    <!-- 运行rviz -->
+<node pkg="rviz" name="rviz" type="rviz" args="-d $(find rslidar_sdk)/rviz/rviz.rviz" />
+</launch>

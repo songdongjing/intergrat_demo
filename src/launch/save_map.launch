@@ -1,0 +1,5 @@
+<launch>  
+    <!-- map_server save-->
+    <arg name="filename" value="$(find nav)/map/my_navmap" />
+    <node name="map_save" pkg="map_server" type="map_saver" args="-f $(arg filename)" />
+ </launch>  

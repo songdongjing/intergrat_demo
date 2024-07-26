@@ -1,0 +1,8 @@
+prefix=/home/ubuntu/autoware/intergrat_demo/devel
+
+Name: navfn
+Description: Description of navfn
+Version: 1.16.4
+Cflags: -I/home/ubuntu/autoware/intergrat_demo/devel/include -I/home/ubuntu/autoware/intergrat_demo/src/navigation-melodic/navfn/include
+Libs: -L${prefix}/lib -lnavfn
+Requires: geometry_msgs message_runtime nav_core nav_msgs pluginlib roscpp sensor_msgs visualization_msgs

@@ -1,0 +1,60 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/ubuntu/wheeltec_ros1_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/amcl/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/ros_astra_camera/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/base_local_planner/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/carrot_planner/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/clear_costmap_recovery/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/costmap_2d/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/darknet_ros/darknet_ros/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/realsense-ros-development/ddynamic_reconfigure-kinetic-devel/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/depthimage_to_laserscan-melodic-devel/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/dwa_local_planner/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/global_planner/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/ldlidar_19/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/lslidar_m10/lslidar_m10_decoder/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/lslidar_m10/lslidar_m10_driver/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/lsm10_ros/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/lsn10/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/map_server/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/move_base/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/move_slow_and_clear/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/nav_core/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/navfn/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/slam_karto/open_karto-melodic-devel/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/pointcloud_to_laserscan/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/realsense-ros-development/realsense2_camera/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/robot_pose_ekf/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/ros_tensorflow/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/rotate_recovery/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/rrt_exploration/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/slam_karto/sparse_bundle_adjustment-melodic-devel/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/teb_local_planner-melodic-devel/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/tts_make/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/turn_on_wheeltec_robot/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/usb_cam/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/navigation-melodic/voxel_grid/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/web_video_server/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/wheeltec_joy_control/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/wheeltec_multi/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/wheeltec_yolo_action/include/**",
+        "/home/ubuntu/wheeltec_ros1_ws/src/xf_mic_asr_offline/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

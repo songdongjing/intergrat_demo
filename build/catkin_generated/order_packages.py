@@ -1,0 +1,5 @@
+# generated from catkin/cmake/template/order_packages.context.py.in
+source_root_dir = '/home/ubuntu/autoware/intergrat_demo/src'
+whitelisted_packages = ''.split(';') if '' != '' else []
+blacklisted_packages = ''.split(';') if '' != '' else []
+underlay_workspaces = '/home/ubuntu/autoware/intergrat_demo/devel_isolated/slam_gmapping;/home/ubuntu/autoware/intergrat_demo/devel_isolated/rslidar_sdk;/home/ubuntu/autoware/intergrat_demo/devel_isolated/pointcloud_to_laserscan;/home/ubuntu/autoware/intergrat_demo/devel_isolated/gmapping;/home/ubuntu/autoware/intergrat_demo/devel_isolated/autolabor_pro1_driver;/home/ubuntu/autoware/intergrat_demo/devel;/home/ubuntu/wheeltec_ros1_ws/devel;/opt/ros/noetic'.split(';') if '/home/ubuntu/autoware/intergrat_demo/devel_isolated/slam_gmapping;/home/ubuntu/autoware/intergrat_demo/devel_isolated/rslidar_sdk;/home/ubuntu/autoware/intergrat_demo/devel_isolated/pointcloud_to_laserscan;/home/ubuntu/autoware/intergrat_demo/devel_isolated/gmapping;/home/ubuntu/autoware/intergrat_demo/devel_isolated/autolabor_pro1_driver;/home/ubuntu/autoware/intergrat_demo/devel;/home/ubuntu/wheeltec_ros1_ws/devel;/opt/ros/noetic' != '' else []

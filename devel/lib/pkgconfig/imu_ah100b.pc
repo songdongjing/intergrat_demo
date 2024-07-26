@@ -1,0 +1,8 @@
+prefix=/home/ubuntu/autoware/intergrat_demo/devel
+
+Name: imu_ah100b
+Description: Description of imu_ah100b
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,12 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/ubuntu/autoware/intergrat_demo/devel/lib/python3/dist-packages",
+        "/home/ubuntu/wheeltec_ros1_ws/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/ubuntu/autoware/intergrat_demo/devel/lib/python3/dist-packages",
+        "/home/ubuntu/wheeltec_ros1_ws/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ]
+}

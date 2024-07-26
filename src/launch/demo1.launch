@@ -1,0 +1,123 @@
+<launch>
+  <!-- lidar-->
+  <node pkg="rslidar_sdk" name="rslidar_sdk_node" type="rslidar_sdk_node" output="screen">
+    <param name="config_path" value=""/>
+  </node>
+  <!-- rviz -->
+  <node pkg="rviz" name="rviz" type="rviz" args="-d $(find rslidar_sdk)/rviz/rviz.rviz" /> 
+  <!-- autolabor -->
+    <node name="autolabor_driver" pkg="autolabor_pro1_driver" type="autolabor_pro1_driver" output="screen">
+        <param name="port_name" value="/dev/odom_USB" />
+        <param name="odom_frame" value="odom" />
+        <param name="base_frame" value="base_link" />
+
+        <param name="baud_rate" value="115200" />
+        <param name="control_rate" value="10" />
+        <param name="sensor_rate" value="5" />
+
+        <param name="reduction_ratio" value="1.0" />
+        <param name="encoder_resolution" value="1600.0" />
+
+        <param name="wheel_diameter" value="0.25" />
+        <param name="model_param_cw" value="0.80" />
+        <param name="model_param_acw" value="0.80" />
+        <param name="pid_rate" value="50.0" />
+        <param name="maximum_encoding" value="32.0" />
+    </node>
+  <!-- gmapping-->
+    <param name="use_sim_time" value="false"/>
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+      <param name="map_update_interval" value="5.0"/>
+      <param name="maxUrange" value="16.0"/>
+      <param name="sigma" value="0.05"/>
+      <param name="kernelSize" value="1"/>
+      <param name="lstep" value="0.05"/>
+      <param name="astep" value="0.05"/>
+      <param name="iterations" value="5"/>
+      <param name="lsigma" value="0.075"/>
+      <param name="ogain" value="3.0"/>
+      <param name="lskip" value="0"/>
+      <param name="srr" value="0.1"/>
+      <param name="srt" value="0.2"/>
+      <param name="str" value="0.1"/>
+      <param name="stt" value="0.2"/>
+      <param name="linearUpdate" value="1.0"/>
+      <param name="angularUpdate" value="0.5"/>
+      <param name="temporalUpdate" value="3.0"/>
+      <param name="resampleThreshold" value="0.5"/>
+      <param name="particles" value="30"/>
+      <param name="xmin" value="-50.0"/>
+      <param name="ymin" value="-50.0"/>
+      <param name="xmax" value="50.0"/>
+      <param name="ymax" value="50.0"/>
+      <param name="delta" value="0.05"/>
+      <param name="llsamplerange" value="0.01"/>
+      <param name="llsamplestep" value="0.01"/>
+      <param name="lasamplerange" value="0.005"/>
+      <param name="lasamplestep" value="0.005"/>
+    </node>
+
+    <!-- map_server-->
+    <!-- <node pkg="map_server" type="map_saver" name="map_saver1" args="-f home/mymap" output="screen">
+		<remap from="map" to="/map" /> 		
+	  </node> -->
+    <!-- map_server save-->
+    <!-- <arg name="filename" value="$(find nav)/map/my_map" />
+    <node name="map_save" pkg="map_server" type="map_saver" args="-f $(arg filename)" /> -->
+    
+    <!-- map_server load-->
+        <!-- 设置地图的配置文件 -->
+    <arg name="map" default="my_map.yaml" />
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find nav)/map/$(arg map)"/>
+
+    <!-- run pointcloud_to_laserscan node -->
+    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+
+        <remap from="cloud_in" to="/rslidar_points"/>
+        <remap from="scan" to="/scan"/>
+        <rosparam>
+            target_frame: rslidar # Leave disabled to output scan in pointcloud frame
+            transform_tolerance: 0.01
+            min_height: -0.4
+            max_height: 1.0
+
+            angle_min: -3.1415926 # -M_PI
+            angle_max: 3.1415926 # M_PI
+            angle_increment: 0.02 # 0.17degree
+            scan_time: 0.1
+            range_min: 0.2
+            range_max: 100
+            use_inf: true
+            inf_epsilon: 1.0
+
+            # Concurrency level, affects number of pointclouds queued for processing and number of threads used
+            # 0 : Detect number of cores
+            # 1 : Single threaded
+            # 2->inf : Parallelism level
+            concurrency_level: 1
+        </rosparam>
+
+    </node>
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_rslidar" args="0 0.1 0.6 0 0 0 /base_link /rslidar 100" />
+    <!-- 键盘控制 -->
+    <node name="keyboard_driver" pkg="key" type="key_publisher.py" output="screen" />
+    <node name="keys_to_twist" pkg="key" type="key_subsribe.py" output="screen" />
+    <!-- RTK -->
+   <arg name = "gnss_port" default = "/dev/rtk_USB"/>
+   <arg name = "gnss_module" default = "t3"/>
+   <arg name = "gnss_frame_id" default = "gnss"/>
+   <node name="gnss" pkg = "qfrtk_t3" type= "gnssrtk_node" output="screen" >
+   </node>
+   <!--IMU -->
+    <node name="imu_ah100b" pkg="imu_ah100b" type="imu_ah100b_pub" output="screen">
+    <param name="port_name" value="/dev/ttyUSB1" />
+    <param name="serial_port" value="/dev/imu_ah100b" />
+    <param name="framerate" type="int" value="100" />imu_frame
+    </node>
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_imu" args="0 0 0.2 0 0 0 /base_link /imu_frame 100" />
+  <!--camera -->
+
+</launch>
+    <!-- <node pkg="map_server" type="map_saver" name="map_saver1" args="-f home/mymap" output="screen">
+		<remap from="map" to="/map" /> 		
+	  </node> -->
