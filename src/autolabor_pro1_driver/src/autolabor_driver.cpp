@@ -155,7 +155,7 @@ void ChassisDriver::send_speed_callback(const ros::TimerEvent&){
   left_d = (linear_speed - model_param/2 * angular_speed) * pulse_per_cycle_;
   right_d = (linear_speed + model_param/2 * angular_speed) * pulse_per_cycle_;
 
-  radio = std::max(std::max(std::abs(left_d), std::abs(right_d)) / maximum_encoding_, 1.0);
+  radio = std::max(std::max(std::abs(left_d), std::abs(right_d)) / maximum_encoding_, 1.0);//归一化，确保速度在允许的范围内
 
   left = static_cast<short>(left_d / radio);
   right = static_cast<short>(right_d / radio);
@@ -420,10 +420,10 @@ void ChassisDriver::check(uint8_t* data, size_t len, uint8_t& dest){
 /////////////////
 
 void ChassisDriver::run(){
-  ros::NodeHandle node;
-  ros::NodeHandle private_node("~");
+  ros::NodeHandle node;//创建节点句柄
+  ros::NodeHandle private_node("~"); //创建名为"~"的私有节点（只能在本节点内部访问）
 
-  private_node.param<std::string>("port_name", port_name_, std::string("/dev/ttyUSB0"));
+  private_node.param<std::string>("port_name", port_name_, std::string("/dev/ttyUSB0")); //设置私有节点参数
   private_node.param<std::string>("odom_frame", odom_frame_, std::string("odom"));
   private_node.param<std::string>("base_frame", base_frame_, std::string("base_link"));
 
@@ -444,23 +444,23 @@ void ChassisDriver::run(){
   pulse_per_cycle_ = reduction_ratio_ * encoder_resolution_ / (M_PI * wheel_diameter_ * pid_rate_);
 
   if (init()){
-    odom_pub_ = node.advertise<nav_msgs::Odometry>("wheel_odom", 10);
+    odom_pub_ = node.advertise<nav_msgs::Odometry>("wheel_odom", 10);//发布者对象实例化，话题和最大保存的消息数(队列)
     battery_pub_ = node.advertise<std_msgs::Int32>("remaining_battery", 1);
     current_pub_ = node.advertise<std_msgs::Float32>("current", 1);
     voltage_pub_ = node.advertise<std_msgs::Float32>("voltage",1);
-    ros::Subscriber cmd_sub = node.subscribe<geometry_msgs::Twist>("/cmd_vel", 10, &ChassisDriver::twist_callback, this);
-    ros::Timer send_speed_timer = node.createTimer(ros::Duration(1.0/control_rate_), &ChassisDriver::send_speed_callback, this);
+    ros::Subscriber cmd_sub = node.subscribe<geometry_msgs::Twist>("/cmd_vel", 10, &ChassisDriver::twist_callback, this);//订阅控制量，回调函数
+    ros::Timer send_speed_timer = node.createTimer(ros::Duration(1.0/control_rate_), &ChassisDriver::send_speed_callback, this);//定期调用来查询剩余电量
     ros::Timer ask_battery_remainder_timer = node.createTimer(ros::Duration(1.0/sensor_rate_), &ChassisDriver::ask_battery_remainder_callback, this);
     ros::Timer ask_current_timer = node.createTimer(ros::Duration(1.0/sensor_rate_), &ChassisDriver::ask_current_callback, this);
     ros::Timer ask_voltage_timer = node.createTimer(ros::Duration(1.0/sensor_rate_), &ChassisDriver::ask_voltage_callback, this);
-    boost::thread parse_thread(boost::bind(&ChassisDriver::parse_msg, this));
+    boost::thread parse_thread(boost::bind(&ChassisDriver::parse_msg, this));//创建新线程来解析消息
     ros::spin();
     return;
   }
 }
 
 int main(int argc, char **argv){
-  ros::init(argc, argv, "autolabor_driver");
+  ros::init(argc, argv, "autolabor_driver");//初始化节点，名称为"autolabor_driver"
   ChassisDriver driver;
   driver.run();
   return 0;
